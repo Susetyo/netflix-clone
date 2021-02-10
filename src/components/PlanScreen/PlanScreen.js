@@ -12,7 +12,7 @@ function PlanScreen() {
     const user = useSelector(selectUser);
     const [subscription, setSubscription] = useState(null);
     const dispatch = useDispatch();
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         db.collection("customers")
