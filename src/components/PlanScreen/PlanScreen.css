@@ -22,3 +22,9 @@
 .planScreen__plan--disabled > button {
     background-color: gray !important;
 }
+
+.planScreen > h5 {
+    width: 100%;
+    text-align: center;
+    margin-top: 100px;
+}

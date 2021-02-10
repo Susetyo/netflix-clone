@@ -12,6 +12,7 @@ function PlanScreen() {
     const user = useSelector(selectUser);
     const [subscription, setSubscription] = useState(null);
     const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         db.collection("customers")
@@ -68,7 +69,7 @@ function PlanScreen() {
     }, [products, subscription]);
 
     const loadCheckout = async (priceId) => {
-        console.log("priceId", priceId);
+        setIsLoading(true);
         const docRef = await db
             .collection("customers")
             .doc(user.uid)
@@ -104,33 +105,47 @@ function PlanScreen() {
                     ).toLocaleDateString()}
                 </p>
             )}
-            {Object.entries(products).map(([productId, productData]) => {
-                const isCurrentPackage = productData.name
-                    ?.toLowerCase()
-                    .includes(subscription?.role);
 
-                return (
-                    <div
-                        key={productId}
-                        className={`${
-                            isCurrentPackage && "planScreen__plan--disabled"
-                        } planScreen__plan`}
-                    >
-                        <div className="palnScreen__info">
-                            <h5>{productData.name}</h5>
-                            <h6>{productData.description}</h6>
-                        </div>
-                        <button
-                            onClick={() =>
-                                !isCurrentPackage &&
-                                loadCheckout(productData.prices.priceId)
-                            }
-                        >
-                            {isCurrentPackage ? "Current Package" : "Subscribe"}
-                        </button>
-                    </div>
-                );
-            })}
+            {isLoading && <h5>Please wait...</h5>}
+            {!isLoading && (
+                <>
+                    {Object.entries(products).map(
+                        ([productId, productData]) => {
+                            const isCurrentPackage = productData.name
+                                ?.toLowerCase()
+                                .includes(subscription?.role);
+
+                            return (
+                                <div
+                                    key={productId}
+                                    className={`${
+                                        isCurrentPackage &&
+                                        "planScreen__plan--disabled"
+                                    } planScreen__plan`}
+                                >
+                                    <div className="palnScreen__info">
+                                        <h5>{productData.name}</h5>
+                                        <h6>{productData.description}</h6>
+                                    </div>
+
+                                    <button
+                                        onClick={() =>
+                                            !isCurrentPackage &&
+                                            loadCheckout(
+                                                productData.prices.priceId
+                                            )
+                                        }
+                                    >
+                                        {isCurrentPackage
+                                            ? "Current Package"
+                                            : "Subscribe"}
+                                    </button>
+                                </div>
+                            );
+                        }
+                    )}
+                </>
+            )}
         </div>
     );
 }
