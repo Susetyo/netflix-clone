@@ -73,6 +73,10 @@
     font-weight: 400;
 }
 
+.loginScreen__input {
+    margin: 20px;
+}
+
 .loginScreen__input > form > input {
     padding: 10px;
     outline-width: 0;
@@ -92,6 +96,38 @@
     cursor: pointer;
 }
 
-.loginScreen__input {
-    margin: 20px;
+@media only screen and (max-width: 600px) {
+    .loginScreen__body > h1 {
+        font-size: 2.125rem;
+    }
+
+    .loginScreen__body > h2 {
+        font-size: 1.3rem;
+    }
+
+    .loginScreen__body > h3 {
+        font-size: 0.9rem;
+    }
+
+    .loginScreen__input {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .loginScreen__input > form {
+        display: flex;
+        align-items: center;
+        height: 50px;
+    }
+
+    .loginScreen__input > form > input {
+        width: 60%;
+    }
+
+    .loginScreen__getStarted {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        font-size: 1rem;
+    }
 }

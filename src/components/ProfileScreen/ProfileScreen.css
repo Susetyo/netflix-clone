@@ -13,14 +13,6 @@
     max-width: 800px;
 }
 
-.profileScreen__info {
-    display: flex;
-}
-
-.profileScreen__info > img {
-    height: 100px;
-}
-
 .profileScreen__body > h1 {
     font-size: 60px;
     font-weight: 400;
@@ -28,10 +20,37 @@
     margin-bottom: 20px;
 }
 
+.profileScreen__info > img {
+    height: 100px;
+}
+
 .profileScreen__details {
     color: white;
     margin-left: 25px;
     flex: 1;
+}
+
+@media only screen and (max-width: 600px) {
+    .profileScreen__body {
+        width: 90%;
+        padding-top: 20%;
+    }
+
+    .profileScreen__body > h1 {
+        font-size: 2rem;
+    }
+
+    .profileScreen__info > img {
+        display: none;
+    }
+
+    .profileScreen__details {
+        margin-left: 0;
+    }
+}
+
+.profileScreen__info {
+    display: flex;
 }
 
 .profileScreen__details > h2 {
